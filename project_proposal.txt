@@ -1,0 +1,19 @@
+Project Proposal
+
+Project Idea:
+We will perform sentiment analysis on financial news for specific stock tickers and correlate the data with the rise and fall of that stock.
+
+Topics Explored:
+We will explore creating a sentiment analyzer targeted to financial news as well as various methods of data visualization.  We will generate figures presenting our data and findings.
+
+Product:
+Our minimum viable product will be a program that graphs stock prices and the sentiment related to the stock.  Our stretch goal will be to create a program that will correlate sentiment related to a stock and changes in price.  If we have more time, we will also attempt to build a sentiment analyzer for twitter that will gauge current “mood” and correlate “mood” to the overall rise and fall of the NASDAQ/Dow/S&P.
+
+Libraries Used:
+We are planning on using 3 libraries: Bokeh (data visualization), ystockquote (module for retrieving stock quote data), and pattern (web scraping).
+
+Mid-Project Checkin:
+By mid-project checkin, we will have looked into data presentation methods and have done a first take at sentiment analysis.  We will have also started to pull stock data.
+
+Risks:
+Our biggest risks are being able to create an accurate sentiment analyzer and finding an intuitive way to present our findings.
