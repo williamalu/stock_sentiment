@@ -1,10 +1,11 @@
 import csv
 
 def initial_vis():
-"""Parses through csv file and prints each row as a dictionary"""
+	"""Parses through csv file and prints each row as a dictionary"""
 	with open('sentdex_section.csv') as csvfile:
-		reader = csv.DictReader(csvfile)
-
+		fieldnames = ['row_id', 'time', 'ticker', 'value', 'open_price', 'close', 'high', 'low', 'MA100', 'MA250', 'MA500', 'M5000']
+		reader = csv.DictReader(csvfile, fieldnames = fieldnames)
+		
 		for row in reader:
 			print row
 		# 	print(row['id'], row['time'], row['type'], row['value'],
