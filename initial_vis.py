@@ -1,6 +1,7 @@
 import csv
 
 def initial_vis():
+"""Parses through csv file and prints each row as a dictionary"""
 	with open('sentdex_section.csv') as csvfile:
 		reader = csv.DictReader(csvfile)
 
