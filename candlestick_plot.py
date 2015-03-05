@@ -5,6 +5,7 @@ import pandas as pd
 from math import pi
 from bokeh.plotting import *
 from bokeh.models import HoverTool 
+from collections import OrderedDict
 
 def convert_time(unix_time):
 	"""
@@ -41,9 +42,8 @@ def load_stock():
 	return data
 
 def plot_candlestick():
+
 	data = load_stock()
-	data_ = ColumnDataSource(data=data)
-	data_2 = ColumnDataSource(data=data)
 	df = pd.DataFrame(data)
 	df["date"] = pd.to_datetime(df["date"])
 
@@ -61,14 +61,11 @@ def plot_candlestick():
 	p = figure(x_axis_type="datetime", tools=TOOLS, plot_width=1000)
 
 	p.segment(df.date, df.high, df.date, df.low, color="black", toolbar_location="left")
-	p.rect(df.date[inc], mids[inc], w, spans[inc], fill_color="#D5E1DD", line_color="black", source = data_)
-	p.rect(df.date[dec], mids[dec], w, spans[dec], fill_color="#F2583E", line_color="black", source = data_2)
+	p.rect(df.date[inc], mids[inc], w, spans[inc], fill_color="#D5E1DD", line_color="black", source = ColumnDataSource(data={"open": df.open[inc], "close": df.close[inc]}))
+	p.rect(df.date[dec], mids[dec], w, spans[dec], fill_color="#F2583E", line_color="black", source = ColumnDataSource(data={"open": df.open[dec], "close": df.close[dec]}))
 
 	hover = p.select(dict(type=HoverTool))
 	hover.tooltips = {"open":"@open","closing":"@close"}
-
-	#p.select(dict(type=HoverTool)).tooltips = {"sentiment value":"@openprice", "closing price":"@closeprice"}
-	#p.select(dict(type=HoverTool)).tooltips = {"opening price":"$df.open", "closing price":"$df.close"}
 
 	p.title = "GOOG Candlestick"
 	p.xaxis.major_label_orientation = pi/4
