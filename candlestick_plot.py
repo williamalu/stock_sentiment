@@ -9,55 +9,46 @@ def convert_time(unix_time):
 	"""
 	Converts unix time to 'normal' time
 	returns date from unix time
+	Note: not currently being used
 	"""
 	return(datetime.datetime.fromtimestamp(int(unix_time)).strftime('%Y-%m-%d'))
 
 def load_stock():
 	data = {
-		'row_id' : [],
-		'time' : [],
-		'ticker' : [],
-		'value' : [],
-		'open_price' : [],
-		'close' : [],
+		'date' : [],
+		'open' : [],
 		'high' : [],
 		'low' : [],
-		'MA100' : [],
-		'MA250' : [],
-		'MA500' : [],
-		'M5000' : [],
+		'close' : [],
+		'volume' : [],
+		'adj_close': [],
 	}
-	with open('sentdex_section.csv') as f:
+
+	with open('GOOG.csv') as f:
 		next(f)
-		fieldnames = ['row_id','time','ticker','value','open_price','close','high','low','MA100','MA250','MA500','M5000']
-		reader = csv.DictReader(f, fieldnames = fieldnames)
+		reader = csv.reader(f,delimiter=',')
 		
 		for row in reader:
-			data['row_id'].append(row['row_id'])
-			data['time'].append(convert_time(row['time']))
-			data['ticker'].append(row['ticker'])
-			data['value'].append(row['value'])
-			data['open_price'].append(float(row['open_price']))
-			data['close'].append(float(row['close']))
-			data['high'].append(float(row['high']))
-			data['low'].append(float(row['low']))
-			data['MA100'].append(float(row['MA100']))
-			data['MA250'].append(float(row['MA250']))
-			data['MA500'].append(float(row['MA500']))
-			data['M5000'].append(float(row['M5000']))
+			date, open_price, high, low, close, volume, adj_close = row
+			data['date'].append(date)
+			data['open'].append(float(open_price))
+			data['high'].append(float(high))
+			data['low'].append(float(low))
+			data['close'].append(float(close))
+			data['volume'].append(int(volume))
+			data['adj_close'].append(float(adj_close))
 	return data
 
 def plot_candlestick():
 
 	df = pd.DataFrame(load_stock())
+	df["date"] = pd.to_datetime(df["date"])
 
-	print df.open_price
+	mids = (df.open + df.close)/2
+	spans = abs(df.close-df.open)
 
-	mids = (df.open_price + df.close)/2
-	spans = abs(df.close-df.open_price)
-
-	inc = df.close > df.open_price
-	dec = df.open_price > df.close
+	inc = df.close > df.open
+	dec = df.open > df.close
 	w = 12*60*60*1000 # half day in ms
 
 	output_file("candlestick.html", title="candlestick.py example")
@@ -66,11 +57,11 @@ def plot_candlestick():
 
 	p = figure(x_axis_type="datetime", tools=TOOLS, plot_width=1000)
 
-	p.segment(df.time, df.high, df.time, df.low, color="black", toolbar_location="left")
-	p.rect(df.time[inc], mids[inc], w, spans[inc], fill_color="#D5E1DD", line_color="black")
-	p.rect(df.time[dec], mids[dec], w, spans[dec], fill_color="#F2583E", line_color="black")
+	p.segment(df.date, df.high, df.date, df.low, color="black", toolbar_location="left")
+	p.rect(df.date[inc], mids[inc], w, spans[inc], fill_color="#D5E1DD", line_color="black")
+	p.rect(df.date[dec], mids[dec], w, spans[dec], fill_color="#F2583E", line_color="black")
 
-	p.title = "AAPL Candlestick"
+	p.title = "GOOG Candlestick"
 	p.xaxis.major_label_orientation = pi/4
 	p.grid.grid_line_alpha=0.3
 
