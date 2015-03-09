@@ -16,7 +16,7 @@ def convert_time(unix_time):
 	"""
 	return(datetime.datetime.fromtimestamp(int(unix_time)).strftime('%Y-%m-%d'))
 
-def load_stock():
+def load_stock(ticker,start_date,end_date):
 	"""
 	Loads historical stock data from Yahoo Finance given the stock ticker and date range
 	"""
@@ -30,8 +30,7 @@ def load_stock():
  		'adj_close': [],
  	}
 	
-	raw_stock_data = ystockquote.get_historical_prices('GOOG', '2015-02-01', '2015-02-28')
-	print raw_stock_data
+	raw_stock_data = ystockquote.get_historical_prices(ticker, start_date, end_date)
 
 	for day in raw_stock_data:
 		data['date'].append(str(day))
@@ -42,12 +41,15 @@ def load_stock():
 		data['volume'].append(int(raw_stock_data[day]['Volume']))
 		data['adj_close'].append(float(raw_stock_data[day]['Adj Close']))
 
-	print data
 	return data
 
 def plot_candlestick():
 
-	data = load_stock()
+	ticker = raw_input('What is the stock ticker you want to graph? ')
+	start_date = raw_input('What start date would you like? [yyyy-mm-dd] ')
+	end_date = raw_input('What end date would you like? [yyyy-mm-dd] ')
+
+	data = load_stock(ticker, start_date, end_date)
 	df = pd.DataFrame(data)
 	df["date"] = pd.to_datetime(df["date"])
 
