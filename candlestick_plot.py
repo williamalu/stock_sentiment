@@ -1,6 +1,7 @@
 import csv
 import datetime
 import pandas as pd
+import ystockquote
 
 from math import pi
 from bokeh.plotting import *
@@ -16,29 +17,32 @@ def convert_time(unix_time):
 	return(datetime.datetime.fromtimestamp(int(unix_time)).strftime('%Y-%m-%d'))
 
 def load_stock():
-	data = {
-		'date' : [],
-		'open' : [],
-		'high' : [],
-		'low' : [],
-		'close' : [],
-		'volume' : [],
-		'adj_close': [],
-	}
+	"""
+	Loads historical stock data from Yahoo Finance given the stock ticker and date range
+	"""
+ 	data = {
+ 		'date' : [],
+ 		'open' : [],
+ 		'high' : [],
+ 		'low' : [],
+ 		'close' : [],
+ 		'volume' : [],
+ 		'adj_close': [],
+ 	}
+	
+	raw_stock_data = ystockquote.get_historical_prices('GOOG', '2015-02-01', '2015-02-28')
+	print raw_stock_data
 
-	with open('GOOG.csv') as f:
-		next(f)
-		reader = csv.reader(f,delimiter=',')
-		
-		for row in reader:
-			date, open_price, high, low, close, volume, adj_close = row
-			data['date'].append(date)
-			data['open'].append(float(open_price))
-			data['high'].append(float(high))
-			data['low'].append(float(low))
-			data['close'].append(float(close))
-			data['volume'].append(int(volume))
-			data['adj_close'].append(float(adj_close))
+	for day in raw_stock_data:
+		data['date'].append(str(day))
+		data['open'].append(float(raw_stock_data[day]['Open']))
+		data['high'].append(float(raw_stock_data[day]['High']))
+		data['low'].append(float(raw_stock_data[day]['Low']))
+		data['close'].append(float(raw_stock_data[day]['Close']))
+		data['volume'].append(int(raw_stock_data[day]['Volume']))
+		data['adj_close'].append(float(raw_stock_data[day]['Adj Close']))
+
+	print data
 	return data
 
 def plot_candlestick():
