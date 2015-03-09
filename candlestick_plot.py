@@ -73,7 +73,8 @@ def plot_candlestick():
 	hover = p.select(dict(type=HoverTool))
 	hover.tooltips = {"open":"@open","closing":"@close"}
 
-	p.title = "GOOG Candlestick"
+	plot_title = "{} Candlestick".format(ticker)
+	p.title = plot_title
 	p.xaxis.major_label_orientation = pi/4
 	p.grid.grid_line_alpha=0.3
 
