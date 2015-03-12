@@ -10,9 +10,11 @@ This data visualizer uses bokeh. Install Bokeh by following the directions on Bo
 http://bokeh.pydata.org/en/latest/docs/installation.html
 
 In order to run the visualizer, ystockquote must also be downloaded. It can be downloaded using the terminal as the following:
+
 $ pip install ystockquote
 
 It is possible that ystockquote must be modified in order to get the code to run. It is line 165, and must be modified to:
+
 url = 'http://real-chart.finance.yahoo.com/table.csv?%s' % params
 
 Also, stocks_sentdex.csv must be downlaoded. This provides the sentiment data. It can be downloaded here: 
