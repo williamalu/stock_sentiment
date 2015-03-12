@@ -1,17 +1,19 @@
 # stock_sentiment
 
-**The GitHub repository for a stock sentiment analyzer and data visualizer.**
+#The GitHub repository for a stock sentiment analyzer and data visualizer.
 
-authors: William Lu and Kevin Crispie
+**authors: William Lu and Kevin Crispie**
 
 **Obtaining necessary packages:**
 
 This data visualizer uses bokeh. Install Bokeh by following the directions on Bokeh's website here:
 http://bokeh.pydata.org/en/latest/docs/installation.html
 
-In order to run the visualizer, ystockquote must also be downloaded. It can be downloaded using the terminal as the following:
+In order to run the visualizer, the module ystockquote must also be downloaded. It can be downloaded using the terminal as the following:
 
 $ pip install ystockquote
+
+Further directions can be found here: https://pypi.python.org/pypi/ystockquote
 
 It is possible that ystockquote must be modified in order to get the code to run. It is line 165, and must be modified to:
 
