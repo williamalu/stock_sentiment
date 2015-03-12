@@ -3,7 +3,9 @@ A Python program that pulls stock price and sentiment data from
 Yahoo Finance and SentDex, respectively, and graphs an interactive
 candlestick chart.
 
-To use: install ystockquote and bokeh
+created by William Lu and Kevin Crispie at Olin College of Engineering
+
+To use: install ystockquote and bokeh. See README for more details
 
 On docstrings: this code is not "doctestable" because almost all our
 data is stored in dictionaries.  Keys are not stored in the same order
@@ -48,7 +50,7 @@ class convert_time(object):
 
 def load_stock(ticker,start_date,end_date):
 	"""
-	Loads historical stock data from Yahoo Finance given the stock ticker and date range
+	Loads historical stock data from Yahoo Finance given the stock ticker, start date, and end date
 	"""
  	data = {
  		'date' : [],
