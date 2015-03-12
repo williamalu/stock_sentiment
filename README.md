@@ -24,4 +24,6 @@ http://sentdex.com/downloads/stocks_sentdex.csv.gz
 
 **Running the data visualizer:**
 
-When running the data visualizer, it is important to input a ticker in all capital letters, according to the proper ticker form (eg Google is GOOG, Apple is AAPL). Also, the date must be inputted as YYYY-mm-dd, or year (4 digits), then month(2 digits) and then day (2 digits), all separated by dashes. The code will likely take a long time to run. Hit control-c to stop execution. 
+When running the data visualizer, it is important to input a ticker in all capital letters, according to the proper ticker form (eg Google is GOOG, Apple is AAPL). Also, the date must be inputted as YYYY-mm-dd, or year (4 digits), then month(2 digits) and then day (2 digits), all separated by dashes. Input a start date and and end date that is after 2012. The end date should be after the start date for the program to work.
+
+The code will likely take a long time to run. Hit control-c to stop execution. 
