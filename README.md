@@ -1,8 +1,7 @@
 # stock_sentiment
 
-##The GitHub repository for a stock sentiment analyzer and data visualizer.
-
-**Authors: William Lu and Kevin Crispie**
+###The GitHub repository for a stock sentiment analyzer and data visualizer.
+#####Authors: William Lu and Kevin Crispie
 
 **Obtaining necessary packages:**
 
