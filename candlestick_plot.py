@@ -19,6 +19,9 @@ import pandas as pd
 import ystockquote
 
 from math import pi
+#be careful about using import *s in general, it's not unreasonable to do here
+#given that it's the only package you did an import * from, but it still makes
+#it so that it isn't as easy to track where functions are coming from.
 from bokeh.plotting import *
 from bokeh.models import HoverTool 
 from collections import OrderedDict
@@ -98,6 +101,8 @@ def load_sentiment(ticker,start_date,end_date):
 			date_list.append(str(curr_date))
 			curr_date += time_step
 
+                #oh my lord this is nested deep, but it really seems unavoidable. To make this look less terrible,
+                #consider yet another function!
 		for row in reader:
 			converted_time = convert_time(row['time'])
 			for a in date_list:
@@ -120,6 +125,7 @@ def process_sentiment(data):
 	Averages all the sentiment numbers for a date key in a dictionary
 	"""
 	avg_data = {
+        #some really funny indenting going on here. Why did you guys use 8 spaces for indents?
 				'date' : [],
 				'sentiment' : [],
 	}
@@ -181,3 +187,5 @@ def plot_candlestick():
 
 if __name__ == '__main__':
 	plot_candlestick()
+
+#I don't have many comments on your code! It's nice and modular, and really well documented. Really the only thing to consider is maybe getting even more functions in there to break up the particularly long bits of code.

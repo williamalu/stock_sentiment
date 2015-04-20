@@ -77,3 +77,5 @@ hover.tooltips = [
 ]
 
 show(p)
+
+#I like that you added the hover tooltip stuff in a separate file.
